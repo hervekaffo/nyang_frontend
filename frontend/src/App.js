@@ -9,6 +9,8 @@ import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import MealScreen from "./screens/MealScreen";
+import CreateMealScreen from "./screens/CreateMealScreen";
 const App = () => {
   return (
     <Router>
@@ -17,9 +19,11 @@ const App = () => {
         <Container>
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
-          <Route path="/round/:id" component={RoundScreen} />
+          <Route path="/meal/:id" component={MealScreen} />
+          <Route path="/meals/:id" component={MealScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
+          <Route path="/createmeal" component={CreateMealScreen} />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

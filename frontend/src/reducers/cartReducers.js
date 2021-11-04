@@ -11,13 +11,13 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     case CART_ADD_ITEM:
       const item = action.payload;
 
-      const existItem = state.cartItems.find((x) => x.round === item.round);
+      const existItem = state.cartItems.find((x) => x.meal === item.meal);
 
       if (existItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((x) =>
-            x.round === existItem.round ? item : x
+            x.meal === existItem.meal ? item : x
           ),
         };
       } else {
@@ -30,7 +30,13 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     case CART_REMOVE_ITEM:
       return {
         ...state,
-        cartItems: state.cartItems.filter((x) => x.round !== action.payload),
+        cartItems: state.cartItems.filter((x) => x.meal !== action.payload),
+      };
+
+    case CART_CLEAR_ITEMS:
+      return {
+        ...state,
+        cartItems: [],
       };
 
     default:

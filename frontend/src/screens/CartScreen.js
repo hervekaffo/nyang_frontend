@@ -28,7 +28,7 @@ const CartScreen = ({ match, location, history }) => {
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
-    console.log("removed");
+    console.log(id);
   };
 
   const checkoutHandler = () => {
@@ -42,29 +42,29 @@ const CartScreen = ({ match, location, history }) => {
   return (
     <Row>
       <Col md={8}>
-        <h1>Djangui Payment</h1>
+        <h1>Meals Booked</h1>
         {cartItems.length === 0 ? (
           <Message>
-            You did not pay for any Djangui <Link to="/">Go Back</Link>
+            You did not booked any meal for pickup <Link to="/">Go Back</Link>
           </Message>
         ) : (
           <ListGroup variant="flush">
             {cartItems.map((item) => (
-              <ListGroup.Item key={item.round}>
+              <ListGroup.Item key={item.meal}>
                 <Row>
                   <Col md={2}>
                     <Image src={item.image} alt={item.name} fluid rounded />
                   </Col>
                   <Col md={3}>
-                    <Link to={`/round/${item.round}`}>{item.name}</Link>
+                    <Link to={`/meal/${item.meal}`}>{item.name}</Link>
                   </Col>
-                  <Col md={2}>${amount}</Col>
-                  <Col md={2}>Due Date: {item.date}</Col>
+                  <Col md={2}>${item.description}</Col>
+                  <Col md={2}>Expiration Date: {item.date}</Col>
                   <Col md={2}>
                     <Button
                       type="button"
                       variant="light"
-                      onClick={() => removeFromCartHandler(item.round)}
+                      onClick={() => removeFromCartHandler(item.meal)}
                     >
                       <i className="fas fa-trash"></i>
                     </Button>
@@ -79,20 +79,19 @@ const CartScreen = ({ match, location, history }) => {
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + 1, 0)})
-                Djanguis
-              </h2>
-              ${cartItems.reduce((acc, item) => acc + amount, 0).toFixed(2)}
+              <h2>Subtotal () Meals Booked</h2>
+              Location : {cartItems.length !== 0 ? cartItems[0].location : ""}
             </ListGroup.Item>
             <ListGroup.Item>
               <Button
                 type="button"
                 className="btn-block"
-                disabled={cartItems.length === 0}
+                disabled={
+                  cartItems.length !== 0 ? cartItems[0].qty === 0 : true
+                }
                 onClick={checkoutHandler}
               >
-                Proceed To Payment
+                Proceed To Pickup
               </Button>
             </ListGroup.Item>
           </ListGroup>

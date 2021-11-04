@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -12,8 +13,11 @@ const RegisterScreen = ({ location, history }) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [picture, setPicture] = useState("/images/user.png");
+  const [image, setImage] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -21,6 +25,31 @@ const RegisterScreen = ({ location, history }) => {
   const { loading, error, userInfo } = userRegister;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    console.log(file);
+    //setUploading(true);
+    //setImage(file);
+
+    // try {
+    //   const config = {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   };
+
+    //   const { data } = await axios.post("nyang/meals/upload", formData, config);
+    //   console.log(data);
+    //   setImage(data);
+    //   setUploading(false);
+    // } catch (error) {
+    //   console.error(error);
+    //   setUploading(false);
+    // }
+  };
 
   useEffect(() => {
     if (userInfo) {
@@ -40,12 +69,22 @@ const RegisterScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
+      {console.log(image)}
       <h1>Sign Up</h1>
+      <div className="mb-4">
+        <Image
+          src={picture}
+          alt="user"
+          width="100"
+          height="100"
+          roundedCircle
+        />
+      </div>
       {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId="firstName">
+        <Form.Group className="mb-2" controlId="firstName">
           <Form.Label>First Name</Form.Label>
           <Form.Control
             type="name"
@@ -54,7 +93,7 @@ const RegisterScreen = ({ location, history }) => {
             onChange={(e) => setFirstName(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group controlId="lastName">
+        <Form.Group className="mb-2" controlId="lastName">
           <Form.Label>Last Name</Form.Label>
           <Form.Control
             type="name"
@@ -64,7 +103,7 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="email">
+        <Form.Group className="mb-2" controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type="email"
@@ -74,7 +113,7 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="password">
+        <Form.Group className="mb-2" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -84,7 +123,7 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="confirmPassword">
+        <Form.Group className="mb-3" controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
@@ -92,6 +131,31 @@ const RegisterScreen = ({ location, history }) => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Label>Select your Profile Picture</Form.Label>
+          <Form.Control
+            type="file"
+            onChange={(e) => setPicture(e.target.files[0])}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="image">
+          <Form.Label>Image</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter image url"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          ></Form.Control>
+          <Form.File
+            id="image-file"
+            label="Choose File"
+            custom
+            onChange={uploadFileHandler}
+          ></Form.File>
+          {uploading && <Loader />}
         </Form.Group>
 
         <Button type="submit" variant="primary">

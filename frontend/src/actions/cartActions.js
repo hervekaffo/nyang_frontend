@@ -7,15 +7,18 @@ import {
 } from "../constants/cartConstants";
 
 export const addToCart = (id, amount) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/nyang/rounds/${id}`);
+  const { data } = await axios.get(`/nyang/meals/${id}`);
 
   dispatch({
     type: CART_ADD_ITEM,
     payload: {
-      round: data.roundId,
+      meal: data.mealId,
       name: data.name,
-      image: data.image,
-      date: data.date,
+      image: data.picture,
+      date: data.expirationDate,
+      location: data.location,
+      description: data.description,
+      qty: data.qty,
     },
   });
 

@@ -136,7 +136,7 @@ const ProfileScreen = ({ location, history }) => {
         )}
       </Col>
       <Col md={9}>
-        <h2>My Djanguis</h2>
+        <h2>My Meals</h2>
       </Col>
     </Row>
   );

@@ -14,14 +14,37 @@ import {
   userUpdateProfileReducer,
 } from "./reducers/userReducers";
 
+import {
+  mealCreateReducer,
+  mealDeleteReducer,
+  mealDetailsReducer,
+  mealListByUserReducer,
+  mealListReducer,
+  mealReviewCreateReducer,
+  mealTopRatedReducer,
+  mealUpdateReducer,
+} from "./reducers/mealReducers";
+
 const reducer = combineReducers({
+  //round reducers
   roundList: roundListReducer,
   roundDetails: roundDetailsReducer,
+  //cart reducer
   cart: cartReducer,
+  //user reducers
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  //meal reducers
+  mealCreate: mealCreateReducer,
+  mealDelete: mealDeleteReducer,
+  mealDetails: mealDetailsReducer,
+  mealListByUser: mealListByUserReducer,
+  mealList: mealListReducer,
+  mealReviewCreate: mealReviewCreateReducer,
+  mealTopRated: mealTopRatedReducer,
+  mealUpdate: mealUpdateReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
