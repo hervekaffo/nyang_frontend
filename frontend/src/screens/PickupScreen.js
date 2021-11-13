@@ -41,8 +41,7 @@ const PickupScreen = ({ match, history }) => {
   const cook = meal.userDetails;
   const ads = cook.addresses;
 
-  const clientId =
-    "Ad5jpY39gD-lzcjSTG9PVa2PUSVpEoWtCmFt7FXXOPM_vkZ8AO7F5qVXHS35m1wVO5hywl-FUkAUmu43";
+  const clientId = "";
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
