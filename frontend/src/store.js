@@ -45,6 +45,7 @@ const reducer = combineReducers({
   mealReviewCreate: mealReviewCreateReducer,
   mealTopRated: mealTopRatedReducer,
   mealUpdate: mealUpdateReducer,
+  mealByUser: mealListByUserReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

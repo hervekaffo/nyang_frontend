@@ -55,7 +55,7 @@ const MealScreen = ({ history, match }) => {
                 <Rating value={3} text={`user reviews`} />
               </ListGroup.Item>
               <ListGroup.Item>
-                Available from ${meal.cookingDate} To ${meal.expirationDate}
+                Available from {meal.cookingDate} To {meal.expirationDate}
               </ListGroup.Item>
               <ListGroup.Item>Pickup Notes : {meal.notes}</ListGroup.Item>
               <ListGroup.Item>Cook : </ListGroup.Item>

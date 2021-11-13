@@ -123,3 +123,25 @@ export const createMeal = (meal) => async (dispatch, getState) => {
     });
   }
 };
+
+//Get the meals for a user api call
+export const getMealsByUsers = (userId) => async (dispatch) => {
+  try {
+    dispatch({ type: MEAL_USER_LIST_REQUEST });
+
+    const { data } = await axios.get(`/nyang/meals/user/${userId}`);
+
+    dispatch({
+      type: MEAL_USER_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: MEAL_USER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

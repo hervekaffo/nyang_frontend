@@ -16,7 +16,7 @@ import { addToCart, removeFromCart } from "../actions/cartActions";
 const CartScreen = ({ match, location, history }) => {
   const roundId = match.params.id;
 
-  const amount = location.search ? Number(location.search.split("=")[1]) : 300;
+  const amount = location.search ? Number(location.search.split("=")[1]) : 0;
 
   const dispatch = useDispatch();
 
@@ -32,8 +32,8 @@ const CartScreen = ({ match, location, history }) => {
   };
 
   const checkoutHandler = () => {
-    // history.push('/login?redirect=shipping')
-    console.log("checkout");
+    history.push("/login?redirect=addressnotes");
+    //console.log("checkout");
   };
 
   const cart = useSelector((state) => state.cart);

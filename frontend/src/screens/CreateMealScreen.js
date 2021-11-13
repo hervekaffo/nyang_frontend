@@ -41,6 +41,25 @@ const CreateMealScreen = ({ history }) => {
     }
   }, [history, success]);
 
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    console.log(file.name);
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    //const { data } = await axios.post("/nyang/meals/upload", formData, config);
+
+    setPicture(`/images/${file.name}`);
+    setUploading(false);
+  };
+
   const createMealHandler = (e) => {
     e.preventDefault();
     //dispatch createMeal
@@ -99,9 +118,8 @@ const CreateMealScreen = ({ history }) => {
             ></Form.Control>
             <Form.File
               id="image-file"
-              label="Choose File"
               custom
-              //onChange={uploadFileHandler}
+              onChange={uploadFileHandler}
             ></Form.File>
             {uploading && <Loader />}
           </Form.Group>

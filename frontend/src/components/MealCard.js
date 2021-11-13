@@ -17,21 +17,15 @@ const MealCard = ({ meal }) => {
             </Card.Title>
           </Link>
           <Card.Text as="div">
-            <div className="my-3">
-              <Rating value={3} text={`User reviews`} />
-              Location : {meal.location}
-            </div>
+            <div className="my-3">Location : {meal.location}</div>
           </Card.Text>
           <Card.Text as="div">Quantity : {meal.qty}</Card.Text>
           <Card.Text as="div">Description : {meal.description}</Card.Text>
           <Card.Text as="div">Notes : {meal.notes}</Card.Text>
-          <Card.Text as="h4">
-            <div className="my-3">
-              Available from ${meal.cookingDate} To ${meal.expirationDate}
-            </div>
-          </Card.Text>
           <Card.Text as="div">
-            Status : {meal.availavle ? "Available" : "Expired"}
+            <div>
+              Available from {meal.cookingDate} To {meal.expirationDate}
+            </div>
           </Card.Text>
         </Card.Body>
       </Card>
